@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
+//import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.rogs.webscraping.dto.GitResultDTO;
 import com.rogs.webscraping.service.APIService;
 
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -24,7 +25,9 @@ public class APIController {
 	private final APIService service;
 	
 	/* Develop an API that returns the total number of lines and the total number of bytes of all the files of a given public Github repository, grouped by file extension */
-		
+	
+	
+	@ApiOperation("Returns the total number of lines and the total number of bytes of all the files of a given public Github repository, grouped by file extension.")
 	@RequestMapping(value = "/countgitsmallrepo", method = RequestMethod.GET)
 	public ResponseEntity<GitResultDTO> getNumberOfLinesAndNumberOfBytesGroupByFileExtension(@RequestParam String URLGITRepository) throws Exception{
 				
@@ -32,6 +35,7 @@ public class APIController {
 		
 	}
 	
+	@ApiOperation("Returns the total number of lines and the total number of bytes of all the files of a given public Github repository, grouped by file extension. For large repositories, this method uses a webhook (asynchronous process) in preventing time-out.")
 	@RequestMapping(value = "/countgitlargerepo", method = RequestMethod.GET)
 	public ResponseEntity<String> getNumberOfLinesAndNumberOfBytesGroupByFileExtensionLarge(@RequestParam String URLGITRepository, @RequestParam String WebHookURL) throws Exception{
 		
@@ -39,10 +43,11 @@ public class APIController {
 		
 		return ResponseEntity.ok("Process started at: " + LocalDateTime.now().toString());
 	}
-	
+
+/*	@ApiOperation("Teste local webhook")
 	@RequestMapping(value = "/postconfirmation", method = RequestMethod.POST)
 	public void processPost(@RequestParam String token,  @RequestBody String body) {
 	
 		System.out.println("JSON Boby for token: " + token + " is => " +  body);
-	}
+	}*/
 }
