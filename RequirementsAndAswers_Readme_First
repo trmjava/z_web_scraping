@@ -43,16 +43,24 @@ Requirements:
 
 11 -  We’d like to see at least one automated test;
 
-  aswer => Ok. JUNIT for Controller methods.   
+  aswer => Ok. One JUnit for Controller method(/countgitsmallrepo?URLGITRepository=).   
 
 12 - You must deploy your solution to a cloud provider like Amazon AWS or Heroku and send us the link to access it. It’s a plus if you publish a Docker image with your application (including its dependencies) in a registry like Docker Hub and let us know how to get it.
 
   aswer => Published at Heroku ( https://intense-eyrie-64452.herokuapp.com/swagger-ui/#/api-controller ) 
          Ex: ==> https://intense-eyrie-64452.herokuapp.com/countgitsmallrepo?URLGITRepository=https://github.com/trmjava/z_web_scraping
 
+  Docker 
+  
+      docker pull trmjava/z_web_scraping
+      docker run -p 8080:8080 trmjava/z_web_scraping
+      http://localhost:8080/swagger-ui/#/api-controller   (enjoy :)  
+       
+
 13 -  Push your source code to a Github or Bitbucket repository and send the link to jobs-br@trustly.com.
  
   aswer => https://github.com/trmjava/z_web_scraping
+  
   
   
   

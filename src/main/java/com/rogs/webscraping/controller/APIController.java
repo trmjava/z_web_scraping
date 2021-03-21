@@ -13,12 +13,15 @@ import org.springframework.web.bind.annotation.RestController;
 import com.rogs.webscraping.dto.GitResultDTO;
 import com.rogs.webscraping.service.APIService;
 
+import lombok.RequiredArgsConstructor;
+
 @RestController
+@RequiredArgsConstructor
 public class APIController {
 
 		
 	@Autowired
-	private APIService service;
+	private final APIService service;
 	
 	/* Develop an API that returns the total number of lines and the total number of bytes of all the files of a given public Github repository, grouped by file extension */
 		

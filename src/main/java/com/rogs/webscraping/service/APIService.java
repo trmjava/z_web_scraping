@@ -68,9 +68,9 @@ public class APIService {
 				.expirationTime(APIService.getCacheExpirationTime(URL)).build();
 	}
 
-	private static LocalDateTime getCacheExpirationTime(String URL) {
+	private static LocalDateTime getCacheExpirationTime(String url) {
 
-		return APIService.cacheData.get(URL).getExpirationTime();
+		return APIService.cacheData.get(url).getExpirationTime();
 	}
 
 	private static void saveCache(String URL, ArrayList<ReportDTO> result) {
@@ -80,8 +80,8 @@ public class APIService {
 		}
 	}
 
-	private static List<ReportDTO> getCacheData(String URL) {
-		return APIService.cacheData.get(URL).getContent();
+	private static List<ReportDTO> getCacheData(String url) {
+		return APIService.cacheData.get(url).getContent();
 	}
 
 	private static boolean hasCache(String url) {
