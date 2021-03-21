@@ -3,6 +3,7 @@ package com.rogs.webscraping.service;
 import java.io.BufferedInputStream;
 
 import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -101,14 +102,22 @@ public class APIService {
 	private String getURLcontent(String url) throws Exception {
 		byte[] buffer = new byte[4096];
 		ByteArrayOutputStream result = new ByteArrayOutputStream();
-		BufferedInputStream inputStream = new BufferedInputStream((new URL(url)).openStream());
 
-		for (int length; (length = inputStream.read(buffer)) != -1;) {
-			result.write(buffer, 0, length);
+		try {
+			BufferedInputStream inputStream = new BufferedInputStream((new URL(url)).openStream());
+
+			for (int length; (length = inputStream.read(buffer)) != -1;) {
+				result.write(buffer, 0, length);
+			}
+
+			return result.toString("UTF-8");
+			
+		}catch (FileNotFoundException e) {
+		 return "";
 		}
-
-		return result.toString("UTF-8");
-
+		catch (Exception e) {
+			throw e;
+		}
 	}
 
 	private List<Branch> getTREEBranches(String url) throws Exception {
@@ -136,7 +145,7 @@ public class APIService {
 				end++;
 			}
 			String aux = content.substring(start, end);
-			if (!aux.contains("urlEncodedRefName") && aux.contains("/")) {
+			if (!aux.contains("urlEncodedRefName") && aux.contains("/") && !aux.contains("-commit")) {
 				branches.add(Branch.builder().type(BranchType.TREE).URL("https://github.com" + path + aux).build());
 			}
 		}
